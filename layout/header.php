@@ -2,11 +2,22 @@
 require_once './lib/config.php';
 require_once './lib/database.php';
 require_once './lib/query.php';
+require_once './lib/auth.php';
 
 $db = new Database();
 $q = new Query($db);
 $id = isset($_GET['id'])? $_GET['id'] : null;
 $product = array();
+
+$auth = new Auth($db);
+if(isset($_POST['register'])){
+  if($auth->register($_POST)){
+    echo "Register was successful!";
+    die();
+  };
+  echo "Not successful!";
+  die();
+}
 
 if (!empty($id) && is_numeric($id)) {
   $product = $q->product_details($id)[0];

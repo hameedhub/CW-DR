@@ -22,8 +22,6 @@ class Query
 	public function similar_products(){
 		return $this->db->select("SELECT * FROM products LIMIT 5");
 	}
-
-	
 }
 
 
